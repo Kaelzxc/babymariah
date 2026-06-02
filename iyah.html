@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MY MARIAH HAMKDOG</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#ffd1e8,#ffc0da,#ffe3f1);
+    overflow-x:hidden;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+/* Floating Hearts */
+
+.hearts{
+    position:fixed;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    z-index:0;
+}
+
+.heart{
+    position:absolute;
+    bottom:-50px;
+    color:#ff4f93;
+    animation:float linear infinite;
+    opacity:0.6;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(0) rotate(0deg);
+        opacity:0;
+    }
+    20%{
+        opacity:0.7;
+    }
+    100%{
+        transform:translateY(-120vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* Envelope */
+
+.container{
+    position:relative;
+    z-index:5;
+}
+
+.envelope-wrapper{
+    position:relative;
+    width:340px;
+    height:230px;
+    cursor:pointer;
+    transition:1s;
+}
+
+.envelope{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#ff7eb5;
+    border-radius:10px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.2);
+    overflow:hidden;
+}
+
+.envelope::before{
+    content:'';
+    position:absolute;
+    top:0;
+    width:100%;
+    height:100%;
+    background:#ff98c6;
+    clip-path:polygon(0 0,50% 50%,100% 0);
+    z-index:3;
+    transform-origin:top;
+    transition:1s;
+}
+
+.envelope.open::before{
+    transform:rotateX(180deg);
+}
+
+.envelope::after{
+    content:'💌';
+    position:absolute;
+    font-size:50px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+/* Letter */
+
+.letter{
+    position:absolute;
+    width:90%;
+    height:500px;
+    background:rgba(255,255,255,0.95);
+    left:5%;
+    top:20px;
+    border-radius:20px;
+    padding:35px;
+    overflow-y:auto;
+    transform:translateY(150px);
+    opacity:0;
+    transition:1.2s;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+}
+
+.letter.show{
+    transform:translateY(-260px);
+    opacity:1;
+}
+
+.title{
+    text-align:center;
+    font-size:42px;
+    color:#ff4f93;
+    margin-bottom:10px;
+    font-family:'Dancing Script',cursive;
+}
+
+.subtitle{
+    text-align:center;
+    color:#ff77aa;
+    margin-bottom:30px;
+    font-size:15px;
+}
+
+.section{
+    margin-bottom:25px;
+    animation:fadeIn 2s ease;
+}
+
+.section h2{
+    color:#ff4f93;
+    margin-bottom:10px;
+}
+
+.section p{
+    color:#5b4b55;
+    line-height:1.8;
+}
+
+.memory{
+    background:#fff0f7;
+    padding:15px;
+    border-radius:15px;
+    margin-top:12px;
+    border-left:5px solid #ff7eb5;
+}
+
+.signature{
+    margin-top:35px;
+    text-align:right;
+    color:#ff4f93;
+    font-weight:600;
+}
+
+.glow{
+    animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{
+        text-shadow:0 0 5px #ff8fc0;
+    }
+    to{
+        text-shadow:0 0 20px #ff4f93;
+    }
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.open-text{
+    position:absolute;
+    width:100%;
+    text-align:center;
+    bottom:-45px;
+    color:#ff4f93;
+    font-weight:600;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.08);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* Scrollbar */
+
+.letter::-webkit-scrollbar{
+    width:8px;
+}
+
+.letter::-webkit-scrollbar-thumb{
+    background:#ff9dc9;
+    border-radius:10px;
+}
+
+/* Floating Cherry Blossoms */
+
+.petal{
+    position:fixed;
+    top:-30px;
+    font-size:20px;
+    pointer-events:none;
+    z-index:1;
+    animation:fallPetal linear forwards;
+}
+
+@keyframes fallPetal{
+    from{
+        transform:translateY(-10vh) rotate(0deg);
+    }
+    to{
+        transform:translateY(120vh) rotate(720deg);
+    }
+}
+
+/* Sparkles */
+
+.sparkle-star{
+    position:fixed;
+    color:white;
+    pointer-events:none;
+    z-index:1;
+    animation:twinkle 2s infinite;
+}
+
+@keyframes twinkle{
+    0%,100%{
+        opacity:0.2;
+        transform:scale(0.8);
+    }
+    50%{
+        opacity:1;
+        transform:scale(1.2);
+    }
+}
+
+/* Pink Bubbles */
+
+.bubble{
+    position:fixed;
+    bottom:-60px;
+    border-radius:50%;
+    background:rgba(255,182,193,0.35);
+    backdrop-filter:blur(4px);
+    pointer-events:none;
+    z-index:1;
+    animation:bubbleFloat linear forwards;
+}
+
+@keyframes bubbleFloat{
+    from{
+        transform:translateY(0);
+    }
+    to{
+        transform:translateY(-120vh);
+    }
+}
+
+/* Letter Shine */
+
+.letter::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:50%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.7),
+        transparent
+    );
+    animation:shine 5s infinite;
+}
+
+@keyframes shine{
+    0%{
+        left:-100%;
+    }
+    100%{
+        left:200%;
+    }
+}
+
+/* Floating Glow */
+
+body::after{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    background:rgba(255,120,180,0.15);
+    border-radius:50%;
+    filter:blur(120px);
+    top:-150px;
+    right:-150px;
+    pointer-events:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="hearts"></div>
+<div class="petals"></div>
+<div class="sparkles"></div>
+<div class="bubbles"></div>
+
+<div class="container">
+
+    <div class="envelope-wrapper" onclick="openLetter()">
+
+        <div class="envelope" id="envelope"></div>
+
+            <div class="letter" id="letter">
+
+                <h1 class="title glow">
+                    hello babyyy💖
+                </h1>
+
+                <p class="subtitle">
+                    baby mariah uy q
+                </p>
+
+                <div class="section">
+                    <h2>To Someone Truly Special</h2>
+
+                    <p>
+                        thank you so much sa lahat baby ko, sobrang naappreciate ko lahat ng ginagawa mo for me, thank you for making me the happiest every dayyyyyyy grrrrrr, sana never ikaw mapagod sakin.
+                    </p>
+                </div>
+
+                <div class="section">
+                    <h2>reMINDERRrrRRr ✨</h2>
+
+                    <div class="memory">
+                        Nope, never kita iiwan
+                    </div>
+
+                    <div class="memory">
+                        Walang oras na hindi kita mahal
+                    </div>
+
+                    <div class="memory">
+                        Hindi hindi ko ipagpapalit sa kahit ano yung time ko with you
+                    </div>
+
+                    <div class="memory">
+                        I love you super dami dami 4everrr :3
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>feb</h2>
+
+                    <p>
+                    thank you so much nameet kita babyyyyy, sana napapasaya parin kita everyday kahit parang halos paulit ulit nalang ginagawa ko, pinky promise na support po kita sa kahit ano, forever na sa heart ko every memories natin together. since feb walang oras na hindi ako looking forward makasama and makalaro ikaw. thank you so much po sa lahat
+                    </p>
+                </div>
+
+                <div class="section">
+                    <h2><333 💌</h2>
+
+                    <p>
+                        Be kind narin sa sarili ah, kurotin kita if harsh ka parin sa sarili mo, paano nalang if maumay kana sakin ayoko naman na aalis ka mean ka parin sa sarili mo  grrrrr, im yours lang baby so keep me lang as long as ako pa yung nag bring sayo ng happiness and loveeee. always n 4ever kana sa heart ko no matter what <3 thank you so much po ulit sa lahat babyyyy mwawmwawmwaaa
+                    </p>
+                </div>
+
+                <div class="signature">
+                    I LOVE YOU SAUR MUCHHH ❤️
+                </div>
+
+            </div>
+
+            <div class="open-text">
+                Click the letter to open ✨
+            </div>
+
+        </div>
+
+    </div>
+
+<script>
+
+// Floating Hearts
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (15 + Math.random()*25) + "px";
+    heart.style.animationDuration = (5 + Math.random()*5) + "s";
+
+    document.querySelector(".hearts").appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },10000);
+}
+
+setInterval(createHeart,300);
+
+
+// ✅ FIX: define missing variable
+let opened = false;
+
+
+function openLetter(){
+
+    if(opened) return;
+    opened = true;
+
+    document.getElementById("envelope").classList.add("open");
+
+    // Heart Explosion
+    for(let i=0;i<40;i++){
+
+        const heart = document.createElement("div");
+        heart.innerHTML = "💖";
+
+        heart.style.position = "fixed";
+        heart.style.left = "50%";
+        heart.style.top = "50%";
+        heart.style.fontSize = (15 + Math.random()*20) + "px";
+        heart.style.pointerEvents = "none";
+        heart.style.zIndex = "999";
+
+        document.body.appendChild(heart);
+
+        const x = (Math.random()-0.5)*800;
+        const y = (Math.random()-0.5)*800;
+
+        heart.animate([
+            { transform:"translate(0,0)", opacity:1 },
+            { transform:`translate(${x}px,${y}px)`, opacity:0 }
+        ],{
+            duration:2500
+        });
+
+        setTimeout(()=>{
+            heart.remove();
+        },2500);
+    }
+
+    setTimeout(()=>{
+        document.getElementById("letter").classList.add("show");
+    },600);
+}
+
+
+// 🌸 PETALS
+function createPetal(){
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
+    petal.innerHTML = "🌸";
+
+    petal.style.left = Math.random()*100 + "vw";
+    petal.style.animationDuration = (7 + Math.random()*6) + "s";
+
+    document.body.appendChild(petal);
+
+    setTimeout(()=>petal.remove(),13000);
+}
+setInterval(createPetal,700);
+
+
+// ✨ SPARKLES
+function createSparkle(){
+    const sparkle = document.createElement("div");
+    sparkle.classList.add("sparkle-star");
+    sparkle.innerHTML = "✦";
+
+    sparkle.style.left = Math.random()*100 + "vw";
+    sparkle.style.top = Math.random()*100 + "vh";
+    sparkle.style.fontSize = (8 + Math.random()*12) + "px";
+
+    document.body.appendChild(sparkle);
+
+    setTimeout(()=>sparkle.remove(),3000);
+}
+setInterval(createSparkle,150);
+
+
+// 🫧 BUBBLES
+function createBubble(){
+    const bubble = document.createElement("div");
+    bubble.classList.add("bubble");
+
+    const size = 10 + Math.random()*40;
+
+    bubble.style.width = size + "px";
+    bubble.style.height = size + "px";
+    bubble.style.left = Math.random()*100 + "vw";
+    bubble.style.animationDuration = (8 + Math.random()*5) + "s";
+
+    document.body.appendChild(bubble);
+
+    setTimeout(()=>bubble.remove(),14000);
+}
+setInterval(createBubble,900);
+
+
+// 💕 CURSOR TRAIL
+document.addEventListener("mousemove",(e)=>{
+
+    const heart = document.createElement("div");
+    heart.innerHTML = "💕";
+
+    heart.style.position = "fixed";
+    heart.style.left = e.clientX + "px";
+    heart.style.top = e.clientY + "px";
+    heart.style.pointerEvents = "none";
+    heart.style.fontSize = "12px";
+    heart.style.zIndex = "999";
+
+    document.body.appendChild(heart);
+
+    heart.animate([
+        {transform:"translateY(0)",opacity:1},
+        {transform:"translateY(-40px)",opacity:0}
+    ],{
+        duration:1000
+    });
+
+    setTimeout(()=>heart.remove(),1000);
+});
+
+</script>
+
+</body>
+</html>
